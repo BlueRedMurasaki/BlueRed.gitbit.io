@@ -119,7 +119,6 @@ local TpAuraToggle = MainTab:CreateToggle({
    CurrentValue = false,
    Flag = "TpAuraAura", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
-		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Anchored = Value
 		getgenv().killauratp = Value
 		killauratp()
    end,
