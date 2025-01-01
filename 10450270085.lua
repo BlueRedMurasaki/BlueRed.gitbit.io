@@ -85,11 +85,20 @@ while getgenv().killauratp == true do
 		print(toTp)
 		if toTp == nil then return
 		else
-		char.HumanoidRootPart.CFrame = toTp.HumanoidRootPart.CFrame + Vector3.new(-10,0,0)
+		char.HumanoidRootPart.CFrame = toTp.HumanoidRootPart.CFrame
 		end
 	end
 	tpToNearest(getNearest())
 	wait()
+	end
+end
+
+function spamBlackflash()
+	while getgenv().spamBF == true do
+		game:GetService("ReplicatedStorage").Remotes.Server.Combat.ApplyBlackFlashToNextHitbox:FireServer()
+		wait()
+		local ohNumber1 = 2
+		game:GetService("ReplicatedStorage").Remotes.Server.Combat.M2:FireServer(ohNumber1)
 	end
 end
 
@@ -100,6 +109,8 @@ function instantHeal()
 		wait()
 	end
 end
+
+
 
 -------------------------------------------------------
 local MainTab = Window:CreateTab("Main", "rewind") -- Title, Ima
@@ -121,6 +132,15 @@ local TpAuraToggle = MainTab:CreateToggle({
    Callback = function(Value)
 		getgenv().killauratp = Value
 		killauratp()
+   end,
+})
+local BlackFlashToggle = MainTab:CreateToggle({
+   Name = "Spam Blackflashes",
+   CurrentValue = false,
+   Flag = "spamBlackflash", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+		getgenv().spamBF = Value
+		spamBlackflash()
    end,
 })
 local TpRangeSlider = MainTab:CreateSlider({
